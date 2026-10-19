@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Roots Media Marketing - Employee & Task Management System (MERN Stack)",
   "scripts": {
+    "start": "node backend/server.js",
+    "postinstall": "npm --prefix backend install",
     "dev:backend": "npm --prefix backend run dev",
     "dev:frontend": "npm --prefix frontend run dev",
     "seed": "npm --prefix backend run seed",
