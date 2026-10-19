@@ -1,0 +1,14 @@
+{
+  "name": "roots-employee-task-management",
+  "version": "1.0.0",
+  "description": "Roots Media Marketing - Employee & Task Management System (MERN Stack)",
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed",
+    "build:frontend": "npm --prefix frontend run build"
+  },
+  "keywords": ["mern", "employee-management", "task-management", "express", "react", "mongodb"],
+  "author": "Roots Media Assessment Candidate",
+  "license": "ISC"
+}
