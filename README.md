@@ -6,8 +6,13 @@ A robust, enterprise-grade Employee & Task Management application built with **R
 
 ## 🚀 Live Demo & Deployment
 
-- **Frontend Application**: Running locally at `http://localhost:5173` (Deployable to Vercel / Netlify)
-- **Backend API**: Running locally at `http://localhost:5001` (Deployable to Render / Railway)
+| | URL |
+|---|---|
+| 🌐 **Frontend (Vercel)** | [https://roots-assessment-pyvucjr55-rickyrohithus-projects.vercel.app](https://roots-assessment-pyvucjr55-rickyrohithus-projects.vercel.app) |
+| ⚙️ **Backend API (Render)** | [https://roots-assessment.onrender.com](https://roots-assessment.onrender.com) |
+| 📂 **GitHub Repository** | [https://github.com/rickyrohithu/Roots-Assessment](https://github.com/rickyrohithu/Roots-Assessment) |
+
+> **Note**: The Render backend may take ~30 seconds to wake up on the first request (free tier cold start).
 
 ---
 
@@ -223,8 +228,8 @@ Maintains an atomic sequence for generating task IDs sequentially (`TSK-001`, `T
 ### 1. Clone & Install Dependencies
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd "Marketing assessment"
+git clone https://github.com/rickyrohithu/Roots-Assessment.git
+cd Roots-Assessment
 
 # Install backend dependencies
 cd backend
