@@ -1,4 +1,10 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+// Normalize BASE_URL so that full backend URLs (e.g. from Render/Vercel)
+// with or without trailing slash or /api work seamlessly.
+let rawBase = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+if (rawBase && !rawBase.endsWith('/api')) {
+  rawBase = `${rawBase}/api`;
+}
+const BASE_URL = rawBase || '/api';
 
 async function handleResponse(response) {
   const contentType = response.headers.get('content-type');
@@ -24,9 +30,17 @@ async function handleResponse(response) {
   return response;
 }
 
+function buildFullUrl(endpoint) {
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  if (BASE_URL.startsWith('http')) {
+    return new URL(`${BASE_URL}${cleanEndpoint}`);
+  }
+  return new URL(`${BASE_URL}${cleanEndpoint}`, window.location.origin);
+}
+
 export const apiClient = {
   async get(endpoint, params = {}) {
-    const url = new URL(`${BASE_URL}${endpoint}`, window.location.origin);
+    const url = buildFullUrl(endpoint);
     Object.keys(params).forEach((key) => {
       if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
         url.searchParams.append(key, params[key]);
@@ -44,7 +58,8 @@ export const apiClient = {
   },
 
   async post(endpoint, data = {}) {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const url = buildFullUrl(endpoint);
+    const response = await fetch(url.toString(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +71,8 @@ export const apiClient = {
   },
 
   async put(endpoint, data = {}) {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const url = buildFullUrl(endpoint);
+    const response = await fetch(url.toString(), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +84,8 @@ export const apiClient = {
   },
 
   async delete(endpoint) {
-    const response = await fetch(`${BASE_URL}${endpoint}`, {
+    const url = buildFullUrl(endpoint);
+    const response = await fetch(url.toString(), {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +99,7 @@ export const apiClient = {
    * Downloads CSV from backend with current query parameters
    */
   async downloadCSV(endpoint, params = {}, defaultFilename = 'tasks_export.csv') {
-    const url = new URL(`${BASE_URL}${endpoint}`, window.location.origin);
+    const url = buildFullUrl(endpoint);
     Object.keys(params).forEach((key) => {
       if (params[key] !== undefined && params[key] !== null && params[key] !== '') {
         url.searchParams.append(key, params[key]);
