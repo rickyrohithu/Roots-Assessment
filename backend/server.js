@@ -29,6 +29,20 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// Root Route
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Roots Media - Employee & Task Management API is running!',
+    endpoints: {
+      health: '/api/health',
+      employees: '/api/employees',
+      tasks: '/api/tasks',
+      dashboard: '/api/dashboard',
+    },
+  });
+});
+
 // Health Check
 app.get('/api/health', (req, res) => {
   res.status(200).json({
