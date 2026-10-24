@@ -290,7 +290,7 @@ export const TaskList = () => {
         <div className="task-action-buttons">
           <Link to="/tasks/new" className="btn btn-primary">
             <Plus size={16} />
-            <span>+ Add Task</span>
+            <span>Add Task</span>
           </Link>
           <button
             type="button"
@@ -435,7 +435,7 @@ export const TaskList = () => {
             ) : (
               <Link to="/tasks/new" className="btn btn-primary btn-sm mt-3">
                 <Plus size={15} />
-                <span>+ Add Task</span>
+                <span>Add Task</span>
               </Link>
             )}
           </div>
